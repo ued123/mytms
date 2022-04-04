@@ -1,10 +1,12 @@
 package com.practice.mq;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class MyMqttClientTest {
 
     @Test
+    @Disabled
     void mqttConnTest() {
         String MqttServer1 = "tcp://172.16.120.229:1883";
         String client_id = "mqttclienttest323";
@@ -12,7 +14,6 @@ class MyMqttClientTest {
         String passwd = "dkdltpsxm";
         String topic = "map";
 
-        //Receive message from MyMqttClient not Machine
         MyMqttClient ReadFromOtherMQTT = new MyMqttClient(MqttServer1, client_id, username, passwd);
         ReadFromOtherMQTT.init(topic);
 

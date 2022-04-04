@@ -9,50 +9,53 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MyMqttClient implements MqttCallback{
 
-    @Value("${mqtt.domain}")
-    private static String Broker;
+    @Value("${mqtt.url}")
+    private String MqttServerIp;
 
     @Value("${mqtt.clientId}")
-    private static String Client_ID;
+    private String Client_ID;
 
     @Value("${mqtt.username}")
-    private static String UserName;
+    private String UserName;
 
     @Value("${mqtt.password}")
-    private static String Passwd;
+    private String Passwd;
 
-    private static MqttAsyncClient Client;
-    private static MqttMessage message;
-    private static MemoryPersistence persistence;
-    private static MqttConnectOptions connOpts;
-    private static String topic;
+    private MqttAsyncClient Client;
+    private MqttMessage message;
+    private MemoryPersistence persistence;
+    private MqttConnectOptions connOpts;
+    private String topic;
+
 
     public MyMqttClient() {}
 
     public MyMqttClient(String MqttServerIp, String client_id,String username, String passwd){
-        this.Broker = MqttServerIp;
+        this.MqttServerIp = MqttServerIp;
         this.Client_ID = client_id;
         this.UserName = username;
         this.Passwd = passwd;
     }
 
+
     public void init(String topic){
         this.topic = topic;
         this.persistence = new MemoryPersistence();
         try {
-            Client = new MqttAsyncClient(this.Broker, this.Client_ID, this.persistence);
+            Client = new MqttAsyncClient(this.MqttServerIp, this.Client_ID, this.persistence);
             Client.setCallback(this);
 
             connOpts = new MqttConnectOptions();
             connOpts.setUserName(this.UserName);
             connOpts.setPassword(this.Passwd.toCharArray());
             connOpts.setCleanSession(true);
-            System.out.println("Connecting to broker: "+this.Broker);
+            System.out.println("Connecting to broker: "+this.MqttServerIp);
 
             Client.connect(connOpts);
 
