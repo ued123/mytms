@@ -6,13 +6,12 @@ import org.junit.jupiter.api.Test;
 class MyMqttClientTest {
 
     @Test
-    @Disabled
     void mqttConnTest() {
-        String MqttServer1 = "tcp://172.16.120.229:1883";
-        String client_id = "mqttclienttest323";
-        String username = "icent";
-        String passwd = "dkdltpsxm";
-        String topic = "map";
+        String MqttServer1 = "tcp://127.0.0.1:1883";
+        String client_id = "mqts";
+        String username = "practice";
+        String passwd = "qwer1234";
+        String topic = "test";
 
         MyMqttClient ReadFromOtherMQTT = new MyMqttClient(MqttServer1, client_id, username, passwd);
         ReadFromOtherMQTT.init(topic);
@@ -32,6 +31,13 @@ class MyMqttClientTest {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void mqttActiveMq() {
+
+
+
     }
    
 }

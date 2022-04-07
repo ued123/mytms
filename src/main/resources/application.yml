@@ -1,0 +1,24 @@
+spring:
+  thymeleaf:
+    cache: true
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: seungheon
+    password:
+
+mybatis:
+  type-aliases-package: com.practice.db
+  mapper-locations: mybatis/mapper/*.xml
+
+mqtt:
+  url: tcp://172.16.120.229:1883
+  clientId: practice
+  username: icent
+  password: dkdltpsxm
